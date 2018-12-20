@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Register Front</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body>
+	<h1 id='header'>Categories</h1>
+
+	<div class="form-group">
+	 	<label for="name">Name:</label>
+		<input type="name" class="form-control" id="name">
+	</div>
+
+	</br>
+
+	<button id='button'>Add Category</button>
+</body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#button').click(function(){
+			addCategory();
+		});
+	});
+
+	function addCategory(){
+		var name = document.getElementById("name").value;
+		var token = localStorage.getItem("tokenRegister");
+		console.log(name);
+		$.ajax({
+			url: "http://localhost:8888/gpassCAT/public/api/categories",
+			type: 'POST',
+			headers:{
+				'Authorization' : token,
+			},
+			data:{
+				'name': name, 
+			},
+			success: function(response){
+				console.log(response);
+			},
+			error: function(response){
+				console.log(response);
+			}
+		});
+	}
+	
+</script>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login Front</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body>
+	<h1 id='header'>Login Users</h1>
+
+
+	</br>
+
+  	<div class="form-group">
+   	 	<label for="email">Email:</label>
+    	<input type="email" class="form-control" id="email">
+  	</div>
+
+  	</br>
+
+  	<div class="form-group">
+    	<label for="pass">Password:</label>
+    	<input type="password" class="form-control" id="pass">
+ 	</div>
+
+	<button id='button'>Login User</button>
+</body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#button').click(function(){
+			checkUser();
+		});
+	});
+
+	function checkUser(){
+		var email = document.getElementById("email").value;
+		console.log(email);
+		var pass = document.getElementById("pass").value;
+		console.log(pass);
+		$.ajax({
+			url: "http://localhost:8888/GpassPrueba/public/api/user/login",
+			type: 'POST',
+			data:{ 
+				'email': email, 
+				'password': pass
+			},
+			success: function(response){
+				var tokenRegister = response.tokenRegister;
+				localStorage.setItem("tokenRegister",tokenRegister);
+				console.log(response);
+			},
+			error: function(response){
+				console.log(response);
+			}
+		});
+	}
+
+
+	function tokenSuccess(err,response) {
+		if (err) {
+
+		}
+		
+	}
+	
+</script>
+</html>
